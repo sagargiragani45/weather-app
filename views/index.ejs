@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #87CEEB, #00BFFF); /* Light blue gradient */
+      padding: 0;
+      margin: 0;
+    }
+
+    .container {
+      width: 70%;
+      margin: 0 auto;
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.9); /* White background with transparency */
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-top: 50px;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: #1e90ff;
+      font-size: 28px;
+    }
+
+    h3 {
+      color: #00bfff;
+      margin-top: 15px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #555;
+    }
+
+    /* Form Styling */
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #00bfff;
+      border-radius: 8px;
+      width: 300px;
+      margin-right: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #00bfff;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1e90ff;
+    }
+
+    /* Weather Info Styling */
+    .weather-info {
+      margin-top: 20px;
+    }
+
+    .weather-icon {
+      width: 100px;
+      height: 100px;
+      margin-top: 15px;
+    }
+
+    .info {
+      margin-top: 20px;
+      color: #333;
+    }
+
+    .info p {
+      font-size: 18px;
+      margin: 5px 0;
+    }
+
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Weather App</h1>
+  <form action="/weather" method="get">
+    <input type="text" name="city" placeholder="Enter city name" required>
+    <button type="submit">Get Weather</button>
+  </form>
+
+  <% if (weather) { %>
+    <h2>Weather in <%= weather.city %>, <%= weather.country %></h2>
+    <img class="weather-icon" src="<%= weather.icon %>" alt="<%= weather.description %>">
+    <h3><%= weather.description %></h3>
+
+    <div class="weather-info">
+      <div class="info">
+        <p>Temperature: <%= weather.temperature %>°C</p>
+        <p>Feels like: <%= weather.feels_like %>°C</p>
+        <p>Min Temp: <%= weather.temp_min %>°C</p>
+        <p>Max Temp: <%= weather.temp_max %>°C</p>
+        <p>Pressure: <%= weather.pressure %> hPa</p>
+        <p>Humidity: <%= weather.humidity %> %</p>
+        <p>Wind Speed: <%= weather.wind_speed %> m/s</p>
+        <p>Wind Direction: <%= weather.wind_deg %>°</p>
+        <p>Visibility: <%= weather.visibility / 1000 %> km</p>
+        <p>Sunrise: <%= weather.sunrise %></p>
+        <p>Sunset: <%= weather.sunset %></p>
+      </div>
+    </div>
+  <% } %>
+
+  <% if (error) { %>
+    <p class="error"><%= error %></p>
+  <% } %>
+</div>
+
+</body>
+</html>
+
